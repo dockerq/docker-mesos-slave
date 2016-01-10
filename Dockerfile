@@ -1,27 +1,17 @@
-FROM centos:6
+FROM mesosphere/mesos-master:0.26.0-0.2.145.ubuntu1404
 MAINTAINER wlu wlu@linkernetworks.com
 
-RUN rpm -Uvh http://repos.mesosphere.com/el/6/noarch/RPMS/mesosphere-el-repo-6-2.noarch.rpm && \
-    yum -y install mesos
-
-RUN yum install -y vim net-tools && \
+RUN apt-get install -y vim supervisor && \
     echo "set number" >> /etc/vimrc && \
     echo "set ts=4" >> /etc/vimrc && \
     echo "set expandtab" >> /etc/vimrc && \
     echo "set autoindent" >> /etc/vimrc
 
-ADD *.sh /usr/etc/mesos/
-RUN chmod +x /usr/etc/mesos/*.sh
-
-RUN yum install -y python-setuptools && \
-    easy_install supervisor && \
-    mkdir -p /var/mesos/external_log && \
+RUN mkdir -p /var/mesos/external_log && \
     mkdir -p /var/mesos/log_dir && \
     mkdir -p /var/mesos/work
 
 ADD supervisord.conf /etc/
-
-EXPOSE 5050 5051
 
 RUN curl -fLsS https://get.docker.com/ | sh
 
