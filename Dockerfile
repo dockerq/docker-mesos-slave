@@ -1,5 +1,10 @@
-FROM mesosphere/mesos-master:0.26.0-0.2.145.ubuntu1404
+FROM ubuntu:14.04
 MAINTAINER wlu wlu@linkernetworks.com
+
+RUN echo "deb http://repos.mesosphere.io/ubuntu/ trusty main" > /etc/apt/sources.list.d/mesosphere.list && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF && \
+    apt-get -y update && \
+    apt-get -y install mesos=0.26
 
 RUN apt-get install -y vim supervisor && \
     echo "set number" >> /etc/vimrc && \
