@@ -4,7 +4,7 @@ MAINTAINER wlu wlu@linkernetworks.com
 RUN echo "deb http://repos.mesosphere.io/ubuntu/ trusty main" > /etc/apt/sources.list.d/mesosphere.list && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF && \
     apt-get -y update && \
-    apt-get -y install mesos=0.26
+    apt-get -y install mesos
 
 RUN apt-get install -y vim supervisor && \
     echo "set number" >> /etc/vimrc && \
