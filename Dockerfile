@@ -6,7 +6,7 @@ RUN echo "deb http://repos.mesosphere.io/ubuntu/ trusty main" > /etc/apt/sources
     apt-get -y update && \
     apt-get -y install mesos
 
-RUN apt-get install -y vim supervisor && \
+RUN apt-get install -y vim supervisor curl && \
     echo "set number" >> /etc/vimrc && \
     echo "set ts=4" >> /etc/vimrc && \
     echo "set expandtab" >> /etc/vimrc && \
@@ -18,6 +18,6 @@ RUN mkdir -p /var/mesos/external_log && \
 
 ADD supervisord.conf /etc/
 
-RUN curl -fLsS https://get.docker.com/ | sh
+RUN curl -sSL https://get.daocloud.io/docker | sh
 
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
