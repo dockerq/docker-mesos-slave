@@ -20,4 +20,6 @@ ADD supervisord.conf /etc/
 
 RUN curl -sSL https://get.daocloud.io/docker | sh
 
+RUN ln -f -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
