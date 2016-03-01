@@ -9,7 +9,7 @@ RUN echo "deb http://repos.mesosphere.io/ubuntu/ trusty main" > /etc/apt/sources
 RUN apt-get install -y ca-certificates apt-transport-https && \
 	apt-get -y update
 
-RUN apt-get -y install mesos=0.26.0-0.2.145.ubuntu1404 supervisor docker-engine=1.10.1-0~trusty
+RUN apt-get -y install mesos=0.26.0-0.2.145.ubuntu1404 supervisor docker-engine=1.10.2-0~trusty
 
 RUN mkdir -p /var/mesos/external_log && \
     mkdir -p /var/mesos/log_dir && \
