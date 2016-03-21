@@ -11,10 +11,10 @@ RUN apt-get install -y ca-certificates apt-transport-https && \
 
 RUN apt-get -y install mesos=0.26.0-0.2.145.ubuntu1404 supervisor docker-engine=1.10.2-0~trusty
 
-RUN mkdir -p /var/mesos/external_log && \
-    mkdir -p /var/mesos/log_dir && \
-    mkdir -p /var/mesos/work && \
-    mkdir -p /var/mesos/sandbox
+RUN mkdir -p /var/mesos_slave/external_log && \
+    mkdir -p /var/mesos_slave/log_dir && \
+    mkdir -p /var/mesos_slave/work && \
+    mkdir -p /var/mesos_slave/sandbox
 
 ADD supervisord.conf /etc/
 
