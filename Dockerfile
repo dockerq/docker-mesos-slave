@@ -13,10 +13,13 @@ RUN apt-get -y install mesos=0.26.0-0.2.145.ubuntu1404 supervisor docker-engine=
 
 RUN mkdir -p /var/mesos/external_log && \
     mkdir -p /var/mesos/log_dir && \
-    mkdir -p /var/mesos/work
+    mkdir -p /var/mesos/work && \
+    mkdir -p /var/mesos/sandbox
 
 ADD supervisord.conf /etc/
 
 RUN ln -f -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+ENV TERM=linux
 
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
