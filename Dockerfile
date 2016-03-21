@@ -20,6 +20,6 @@ ADD supervisord.conf /etc/
 
 RUN ln -f -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-ENV TERM=linux
+ENV TERM="linux"
 
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
