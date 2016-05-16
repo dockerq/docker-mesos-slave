@@ -42,6 +42,10 @@ MESOS_IP=192.168.10.142
 ...
 ```
 for more configs click [mesos config](http://mesos.apache.org/documentation/latest/configuration/)
+5. run mesos slave
+```
+docker-compose -f ./docker-compose.yml up -d
+```
 
 ## note
 - If you run Mesos in cluster.You need mesos master and mesos slave and zookeeler.for more infomation click [mesos cluster setup](https://github.com/DHOPL/docker-mesos-marathon-cluster)
