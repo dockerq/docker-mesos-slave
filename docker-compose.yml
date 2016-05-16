@@ -1,0 +1,10 @@
+mesos_slave:
+    image: you mesos slave image url
+    net: "host"
+    privileged: true
+    volumes:
+      - /var/mesos_slave:/var/mesos_slave
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /sys/fs/cgroup:/sys/fs/cgroup
+    container_name: mesos_slave
+    env_file: mesos_slave_env

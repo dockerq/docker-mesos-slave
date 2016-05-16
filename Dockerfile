@@ -1,20 +1,19 @@
 FROM ubuntu:14.04
-MAINTAINER wlu wlu@linkernetworks.com
+MAINTAINER adolphlwq kenan3015@gmail.com
 
-RUN echo "deb http://repos.mesosphere.io/ubuntu/ trusty main" > /etc/apt/sources.list.d/mesosphere.list && \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF && \
-    apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
-    echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" > /etc/apt/sources.list.d/docker.list
-
-RUN apt-get install -y ca-certificates apt-transport-https && \
-    apt-get -y update
-
-RUN apt-get -y install mesos=0.26.0-0.2.145.ubuntu1404 supervisor docker-engine=1.10.2-0~trusty
-
-ADD supervisord.conf /etc/
-
+#set time zone
 RUN ln -f -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-ENV TERM="linux"
+#install mesos
+RUN echo "deb http://repos.mesosphere.io/ubuntu/ trusty main" > /etc/apt/sources.list.d/mesosphere.list && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF && \
+    apt-get -y update && \
+    apt-get -y install mesos=0.26.0-0.2.145.ubuntu1404
 
-CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
+#install docker
+RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
+    echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" > /etc/apt/sources.list.d/docker.list && \
+    apt-get -y update && \
+    apt-get install -y ca-certificates apt-transport-https docker-engine=1.10.2-0~trusty
+
+CMD ["mesos-slave"]
